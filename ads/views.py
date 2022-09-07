@@ -3,7 +3,7 @@ from ads.models import Category, Ad, Selections
 from rest_framework.generics import RetrieveAPIView, ListAPIView, CreateAPIView, UpdateAPIView, DestroyAPIView
 from ads.serializer import *
 from rest_framework.permissions import IsAuthenticated
-from ads.permissions import SelectionUpdatePermission, AdUpdatePermissions
+from ads.permissions import SelectionUpdatePermission, AdUpdatePermission
 
 
 class CategoryListView(ListAPIView):
@@ -24,12 +24,12 @@ class CategoryCreateView(CreateAPIView):
 class CategoryUpdateView(UpdateAPIView):
     queryset = Category.objects.all()
     serializer_class = CategoryUpdateSerializer
-    permission_classes = [AdUpdatePermissions]   
+    permission_classes = [AdUpdatePermission]   
      
 class CategoryDeleteView(DestroyAPIView):
     queryset = Category.objects.all()
     serializer_class = CategoryDeleteSerializer
-    permission_classes = [AdUpdatePermissions]    
+    permission_classes = [AdUpdatePermission]    
         
 class AdListView(ListAPIView):
     queryset = Ad.objects.all()
@@ -66,17 +66,17 @@ class AdDetailView(RetrieveAPIView):
 class AdCreateView(CreateAPIView):
     queryset = Ad
     serializer_class = AdCreateSerializer
-    permission_classes = [AdUpdatePermissions]
+    permission_classes = [AdUpdatePermission]
     
 class AdUpdateView(UpdateAPIView):
     queryset = Ad
     serializer_class = AdUpdateSerializer
-    permission_classes = [AdUpdatePermissions]
+    permission_classes = [AdUpdatePermission]
 
 class AdDeleteView(DestroyAPIView):
     queryset = Ad
     serializer_class = AdDeleteSerializer
-    permission_classes = [AdUpdatePermissions]
+    permission_classes = [AdUpdatePermission]
 
 class SelectionListView(ListAPIView):
     queryset = Selections

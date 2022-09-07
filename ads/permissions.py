@@ -1,7 +1,7 @@
 from users.models import User
 from rest_framework import permissions
 
-class SelectionUpdatePermission(permissions.Permission):
+class SelectionUpdatePermission(permissions.BasePermission):
     message = ""
     
     def has_permission(self, request, view, obj):
@@ -10,7 +10,7 @@ class SelectionUpdatePermission(permissions.Permission):
         return False
     
 
-class AdUpdatePermission(permissions.Permission):
+class AdUpdatePermission(permissions.BasePermission):
     message = "You a not permissions"
     
     def has_permission(self, request, view, obj):
