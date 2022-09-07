@@ -91,7 +91,7 @@ class SelectionDetailView(RetrieveAPIView):
 class SelectionCreateView(CreateAPIView):
     queryset = Selections
     serializer_class = SelectionCreateSerializer
-    permission_classes = [SelectionUpdatePermission]
+    permission_classes = [IsAuthenticated]
     
 class SelectionUpdateView(UpdateAPIView):
     queryset = Selections

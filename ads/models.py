@@ -5,6 +5,7 @@ from users.models import User
 
 class Category(models.Model):
     name = models.CharField(max_length=50)
+    slug = models.SlugField(max_length=10, default=None, null=True)
     class Meta:
         verbose_name = "Категория"
         verbose_name_plural = "Категории"

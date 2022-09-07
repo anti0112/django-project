@@ -33,7 +33,7 @@ class AdListSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Ad
-        fields = ['Id', 'name', 'category', 'author']
+        fields = "__all__"
 
 
 class AdDetailSerializer(serializers.ModelSerializer):
