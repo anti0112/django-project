@@ -1,6 +1,12 @@
 from users.models import User, Location
 from rest_framework import serializers
 
+class CheckRamblerDomen:
+    def __call__(self, value:str):
+        if "rambler" in value.split("@")[1]:
+            raise serializers.ValidationError("registration from this domain is prohibited(rambler.ru)")
+            
+            
 class LocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Location
@@ -25,10 +31,12 @@ class UserDetailSerializer(serializers.ModelSerializer):
 
 class UserCreateSerializer(serializers.ModelSerializer):
     location = serializers.SlugRelatedField(
+        many=True,
         read_only=True,
         slug_field='name'
     )
     
+    email = serializers.EmailField(validators=[CheckRamblerDomen])
     class Meta:
         model = User
         fields = '__all__'

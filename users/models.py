@@ -1,5 +1,13 @@
+from msilib.schema import _Validation
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from datetime import date
+from django.core.exceptions import ValidationError
+
+
+def check_birthday(value:date):
+    if date.today().year - value.year < 9:
+        raise ValidationError(f"Your age must be more than 9 years old")
 
 class Location(models.Model):
     id = models.AutoField(primary_key=True)
@@ -28,6 +36,7 @@ class User(AbstractUser):
     role = models.CharField(max_length=9, choices=ROLES, default=MEMBER)
     age = models.PositiveIntegerField(null=True)
     location = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True)
+    birth_date = models.DateTimeField(auto_now_add=True, null=True, validators=[check_birthday])
 
     class Meta:
         verbose_name = "Пользователь"
